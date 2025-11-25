@@ -105,12 +105,14 @@ def run_bot():
                     # 페이지 이동 (새 탭 띄우지 않고 현재 탭 이동)
                     page.goto(prod['url'], timeout=60000)
                     
-                    # 스크롤 내리기 (판매자 정보 로딩)
-                    for _ in range(6):
-                        page.mouse.wheel(0, 2000)
-                        time.sleep(0.5)
-                    page.keyboard.press("End")
-                    time.sleep(2) # 로딩 대기
+                    # [속도 튜닝 적용] 자바스크립트로 강제 스크롤
+                    # ----------------------------------------------------------
+                    # 기존: for문 돌면서 휠 굴리기 (약 4~5초 소요)
+                    # 수정: 자바스크립트로 바닥으로 순간이동 (약 0.1초 소요)
+                    page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                    
+                    # 데이터 로딩을 위해 딱 1초만 대기 (충분함)
+                    time.sleep(1) 
 
                     # 정보 추출
                     seller, biz, contact = "-", "-", "-"

@@ -1,22 +1,22 @@
-# crawler/models.py
 from django.db import models
 
 class Seller(models.Model):
-    # 사업자 번호는 겹치면 안 되니까 unique=True
-    business_number = models.CharField(max_length=20, unique=True, verbose_name="사업자등록번호")
-    #상호명
-    company_name = models.CharField(max_length=100, verbose_name="상호명")
-
-    ceo_name = models.CharField(max_length=50, verbose_name="대표자명", null=True, blank=True)
-    contact_number = models.CharField(max_length=50, verbose_name="연락처", null=True, blank=True)
-    email = models.EmailField(verbose_name="이메일", null=True, blank=True)
+    # 크롤링 기본 정보
+    rank = models.IntegerField(verbose_name="순위")
+    product_name = models.CharField(max_length=500, verbose_name="상품명")
+    url = models.URLField(unique=True, verbose_name="상품URL")
     
-    # 수집 출처 URL (나중에 확인용)
-    source_url = models.URLField(null=True, blank=True)
+    # 판매자 상세 정보
+    seller_name = models.CharField(max_length=100, default="-", verbose_name="상호")
+    biz_no = models.CharField(max_length=50, default="-", verbose_name="사업자번호")
+    contact = models.CharField(max_length=50, default="-", verbose_name="연락처")
     
-    # 언제 수집했는지 자동 기록
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="최초수집일")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="최근갱신일")
+    # 관리용 필드
+    crawled_at = models.DateTimeField(auto_now=True, verbose_name="수집일시")
 
     def __str__(self):
-        return f"{self.company_name} ({self.business_number})"
+        return f"[{self.rank}위] {self.product_name}"
+
+    class Meta:
+        verbose_name = "쿠팡 판매자 데이터"
+        verbose_name_plural = "쿠팡 판매자 데이터 목록"

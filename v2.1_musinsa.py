@@ -124,6 +124,8 @@ async def run():
                     "_source": {
                         "url": url,
                         "title": title,
+                        "brand": brand_meta, # 👈 여기가 빠져 있었습니다!
+                        "price": price,      # 👈 이것도 추가!
                         "seller_info": {  # 깔끔하게 객체로 묶음
                             "company": info_company,
                             "brand": info_brand,

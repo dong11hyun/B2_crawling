@@ -13,7 +13,7 @@
 
 
 #### 2025_12_19
-- python v1.2_safe_crawler.py
+- python v1.2_safe_crawler.py  / 무신사 fastapi `http://127.0.0.1:8000/docs`
 [무신사 사이트]
       │
       │ (1. 수집: Python Playwright)

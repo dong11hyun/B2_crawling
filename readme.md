@@ -13,7 +13,7 @@
 
 
 #### 2025_12_19
-- python v1.2_safe_crawler.py
+- python v2.1_musinsa.py
 [무신사 사이트]
       │
       │ (1. 수집: Python Playwright)
